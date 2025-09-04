@@ -39,3 +39,27 @@ for file_path in get_files_in_folder(ctx, folder_path):
     
     os.makedirs(local_dir_full, exist_ok=True)
 
+    
+    try:
+        # Download the file to a local file path
+        file = ctx.web.get_file_by_server_relative_url(file_path)
+        ctx.load(file).execute_query()
+
+        local_file_path = os.path.join(local_dir_full, file_name)
+
+        with open(local_file_path, 'wb') as local_file:
+            file.download(local_file).execute_query()
+
+        print(f'File {relative_path} downloaded successfully.')
+        
+        if file_extension in suffix_count.keys():
+            suffix_count[file_extension] += 1
+        else:
+            suffix_count[file_extension] = 0
+        
+    except Exception as e:
+        error_files.append(relative_path)
+        print(f'Failed to download file {relative_path}: {e}')
+
+print(f'Suffix Count: {suffix_count}')
+print(f'Error Count: {error_files}')
