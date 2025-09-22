@@ -1,4 +1,3 @@
-
 ### Import Packages
 from PIL import Image
 import torch
@@ -59,3 +58,25 @@ pix.save("/Users/beatkessler/Desktop/page_001.png")
 print("Seite 1 als Bild gespeichert auf Desktop: page_001.png")
 
 doc.close()
+
+### Step 4 | Embeddings
+
+from PIL import Image
+import torch
+from pathlib import Path
+
+# Open PNG Picture
+page_path = Path("/Users/beatkessler/Desktop/page_001.png")
+page = Image.open(page_path)
+
+with torch.no_grad():
+
+    doc_inputs = processor.process_images([page])
+    doc_inputs = {k: v.to(device) for k, v in doc_inputs.items()}
+
+    # Embedding berechnen
+    doc_vecs_batch = model(**doc_inputs)
+    doc_vec = doc_vecs_batch[0].cpu()
+
+print("Done")
+print(doc_vec)
