@@ -258,7 +258,7 @@ total_files = len(all_paths)
 print("Starting processing of {} files".format(total_files))
 
 try:
-    with ThreadPoolExecutor(max_workers=5) as executor:
+    with ThreadPoolExecutor(max_workers=8) as executor:
         # Submit all tasks
         future_to_path = {executor.submit(process_file, path): path for path in all_paths}
         
