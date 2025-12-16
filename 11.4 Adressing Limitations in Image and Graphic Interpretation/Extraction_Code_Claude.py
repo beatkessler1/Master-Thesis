@@ -21,7 +21,7 @@ for secret in auth_info['secrets']:
         API_KEY = secret['value']
         break
 
-# Gemini endpoint configuration
+# Claude endpoint configuration
 claude_endpoint = 'https://iapi-test.merck.com/gpt/v2/claude-sonnet-4-5-20250929-v1'
 model_name = 'claude-sonnet-4-5-20250929-v1'
 price_per_mil_token = (3.5, 15.0)
