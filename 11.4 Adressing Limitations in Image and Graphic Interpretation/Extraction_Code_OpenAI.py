@@ -21,10 +21,12 @@ for secret in auth_info['secrets']:
         API_KEY = secret['value']
         break
 
-
-gemini_endpoint = 'https://iapi-test.merck.com/gpt/v2/gemini-2-5-pro'
-model_name = 'gemini-2-5-pro'
-price_per_mil_token = (1.25, 5)
+openai.api_type = 'azure'
+openai_azure_endpoint = 'https://iapi-test.merck.com/gpt/libsupport'
+openai.api_version = '2025-03-01-preview'
+openai.api_key = API_Key
+model_name = 'gpt-5-2025-08-07' # gpt-4o-2024-05-13
+price_per_mil_token = (1.25, 10)
 
 # Read recipe inputs
 folder_pref = '/tmp/auto_soe'
