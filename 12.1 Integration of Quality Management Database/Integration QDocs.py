@@ -7,7 +7,7 @@ from utils import getAuthSession, get_files_in_folder
         
 
 base_url = 'https://collaboration.merck.com'
-site_path = '/sites/artworkmgt' # specified Folder for QDocs transferred from Veeva DB
+site_path = '/sites/artworkmgt' # specified SharePoint Folder for QDocs transferred from Veeva DB
 
 username, password = getAuthSession(kerberos=False)
 
