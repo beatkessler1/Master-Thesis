@@ -236,7 +236,7 @@ def process_file(path):
     
     # Write results immediately using the writer (thread-safe)
     with write_lock:
-        # Write each chunk individually using write_row_dict
+        # Write each chunk individually using write_row_dict, writting text chunks sequently instead all at the end
         for chunk in chunks_result:
             output_writer.write_row_dict(chunk)
         
