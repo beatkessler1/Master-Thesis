@@ -257,6 +257,9 @@ def process_file(path):
 total_files = len(all_paths)
 print("Starting processing of {} files".format(total_files))
 
+
+# Threading Approach
+
 try:
     with ThreadPoolExecutor(max_workers=8) as executor:
         # Submit all tasks
