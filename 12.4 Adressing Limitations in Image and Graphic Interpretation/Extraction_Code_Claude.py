@@ -12,7 +12,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from time import time
 from utils_prompt import prepare_excel_for_pdf, convert_office_to_pdf, extract_image_pdf_gemini
 
-# Set parameters
+# Set parameters for Claude
 logging.getLogger('httpx').setLevel(logging.WARNING)
 client = dataiku.api_client()
 auth_info = client.get_auth_info(with_secrets=True)
@@ -24,7 +24,7 @@ for secret in auth_info['secrets']:
 # Claude endpoint configuration
 claude_endpoint = 'https://iapi-test.merck.com/gpt/v2/claude-sonnet-4-5-20250929-v1'
 model_name = 'claude-sonnet-4-5-20250929-v1'
-price_per_mil_token = (3.5, 15.0)
+price_per_mil_token = (3.5, 15.0)  # Input, Output Token
 
 # Read recipe inputs
 folder_pref = '/tmp/auto_soe'
