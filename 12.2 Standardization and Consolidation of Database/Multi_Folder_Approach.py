@@ -235,13 +235,13 @@ def process_file(path):     # responsible for extraction
             )
             duration = round(time() - start_time)
             
-            chunks_result = chunks
-            price_result = price
+            chunks_result = chunks   # Retrun from extract_image_pdf_3 function             
+            price_result = price     # Retrun from extract_image_pdf_3 function  
             
             print("Extracted {} chunks from {} ({} tokens, ${:.2f})".format(
                 len(chunks), basename, tokens, price))
             
-            # Update log row with info from extract_image_pdf_3 code snippet
+            # Update log row with info from extract_image_pdf_3
             log_row.update({
                 'page_count': str(pages),
                 'token_count': str(tokens),
