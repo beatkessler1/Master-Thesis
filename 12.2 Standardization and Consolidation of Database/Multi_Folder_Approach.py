@@ -105,8 +105,8 @@ output_data.write_schema(output_schema, drop_and_create=True)
 log_data.write_schema(log_schema, drop_and_create=True)
 
 # Get writers for appending
-output_writer = output_data.get_writer()
-log_writer = log_data.get_writer()
+output_writer = output_data.get_writer()                  # output_data = dataiku.Dataset("MLF_Chunks")                
+log_data = dataiku.Dataset("Global_Supply_Planning_Log")  # log_writer = log_data.get_writer()
 
 # Thread-safe variables
 price_total = 0
@@ -281,7 +281,7 @@ def process_file(path):
     # Write results immediately using the writer (thread-safe)
     with write_lock:
         # Write chunks using write_row_dict
-        for chunk in chunks_result:   # submit rows from chunk_result dataset
+        for chunk in chunks_result:   # write chunks from chunks_result to dataset in rows
             output_writer.write_row_dict(chunk)
         
         # Write log entry
