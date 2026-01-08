@@ -26,9 +26,8 @@ openai.azure_endpoint = 'https://iapi-test.merck.com/gpt/libsupport'
 openai.api_version = '2025-03-01-preview'
 openai.api_key = API_KEY
 model_name = 'gpt-5-2025-08-07'
-price_per_mil_token = (1.25, 10)
-
-# Read recipe inputs
+price_per_mil_token = (1.25, 10)  # First Number Input Token (1.25), Seccond Number Output Token (10)
+                                  # submited to function as ppmt def => extract_image_pdf_3
 folder_pref = '/tmp/auto_soe'
 environ = os.environ.copy()
 environ['XDG_RUNTIME_DIR'] = folder_pref
