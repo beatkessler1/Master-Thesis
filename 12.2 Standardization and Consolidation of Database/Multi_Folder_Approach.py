@@ -78,7 +78,7 @@ if len(all_paths) == 0:
 output_data = dataiku.Dataset("MLF_Chunks")                 # Text Chunks Folder
 log_data = dataiku.Dataset("Global_Supply_Planning_Log")    # Meta Data Folder
 
-# Define the schemas explicitly    => Schemas are necessary since function submit rows
+# Define the schemas explicitly    => Schemas are necessary since function submit rows in this schema
 output_schema = [
     {"name": "Dir_Name", "type": "string"},
     {"name": "File_Name", "type": "string"}, 
