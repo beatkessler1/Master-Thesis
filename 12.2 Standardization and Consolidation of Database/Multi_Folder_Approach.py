@@ -191,7 +191,7 @@ def process_file(path):     # responsible for extraction
         # Process based on file type - old approach + .doc formats
         if extension == '.pdf':   
             pdf_path = local_path
-
+        # convert File if neccessary
         elif extension in ['.pptx', '.xlsx', '.docx', '.doc']:  # Added .doc to old working list
             pdf_path = local_path.replace(extension, '.pdf')
 
