@@ -467,9 +467,9 @@ def extract_image_pdf_2(file_path, dirname, basename, openai, model_name, ppmt):
 
 
 def extract_image_pdf_3(file_path, dirname, basename, openai, model_name, ppmt):  # Works for both GPT-5 and GPT-4
-    chunks = []
-    price_total = 0
-    tokens_total = 0
+    chunks = []  # collects all text chunks
+    price_total = 0    # counts the total price 
+    tokens_total = 0   # collects token counting
     
     with open(file_path, 'rb') as file:
         reader = pypdf.PdfReader(file)
