@@ -100,7 +100,7 @@ log_schema = [                                        # Metadata fields explicit
     {"name": "error", "type": "string"}
 ]
 
-# Clear datasets and set schemas
+# Clear datasets and set schemas   => necessary for later usage
 output_data.write_schema(output_schema, drop_and_create=True)
 log_data.write_schema(log_schema, drop_and_create=True)
 
@@ -285,7 +285,7 @@ def process_file(path):     # responsible for extraction
         
         # Write log entry
         log_writer.write_row_dict(log_row)       # output_data.write_with_schema(output_df)  .write_with_schema => write all at one
-                                                 # .write_row_dict write => writes one row at the time
+                                                 # .write_row_dict write => writes one row at the time  
     # Update global price counter (thread-safe)
     with price_lock:
         price_total += price_result
@@ -326,8 +326,8 @@ try:
                     log_writer.write_row_dict(error_log)
 finally:
     # Close the writers
-    output_writer.close()
-    log_writer.close()
+    output_writer.close()   # Data is submitted to output_schema
+    log_writer.close()      # Data is submitted to log_schema
 
 print("\n" + "=" * 80)
 print("PROCESSING COMPLETED")
