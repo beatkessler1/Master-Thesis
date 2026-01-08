@@ -290,7 +290,7 @@ def extract_image_pdf(file_path, dirname, basename, openai, model_name, ppmt):
             tokens_complet = response.usage.completion_tokens
             tokens_total += tokens_complet
             
-            price_total += (ppmt[0] * response.usage.prompt_tokens + ppmt[1] * tokens_complet) / 1000000
+            price_total += (ppmt[0] * response.usage.prompt_tokens + ppmt[1] * tokens_complet) / 1000000  # Price Calculation
 
             # if tokens_complet > 8192:
             #     print(f"The number of tokens from the page {page_num} of the file {file_path} exceeds the limit.")
