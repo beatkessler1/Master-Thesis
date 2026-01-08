@@ -308,8 +308,8 @@ try:
         # Submit all tasks
         future_to_path = {executor.submit(process_file, path): path for path in all_paths}  # same function done with 5 executors
         
-        # Process results as they complete
-        for future in as_completed(future_to_path):
+        # Process results as they complete      
+        for future in as_completed(future_to_path):    # futures for correctnes, control, and observability in programm
             path = future_to_path[future]
             try:
                 future.result()
