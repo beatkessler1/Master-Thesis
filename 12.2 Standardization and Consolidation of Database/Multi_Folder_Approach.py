@@ -244,10 +244,10 @@ def process_file(path):
             
             # Update log row with info from extract_image_pdf_3
             log_row.update({
-                'page_count': str(pages),    # Return Position 1
-                'token_count': str(tokens),  # Return Position 2
-                'extract_duration': '{}s'.format(duration),  # Return Position 3
-                'price_total': '{:.2f}$'.format(price)   # Return Position 4 
+                'page_count': str(pages),    # Return Position 
+                'token_count': str(tokens),  # Return Position 
+                'extract_duration': '{}s'.format(duration),  # Return Position
+                'price_total': '{:.2f}$'.format(price)   # Return Position 
             })
                 
         except Exception as e:
