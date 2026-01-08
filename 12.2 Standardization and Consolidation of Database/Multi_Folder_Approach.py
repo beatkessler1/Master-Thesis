@@ -46,7 +46,7 @@ FOLDER_IDS = [f for f in [Folder_1, Folder_2, Folder_3, Folder_4, Folder_5] if f
 
 # Collect all file paths from all folders
 all_paths = []   # Folder Context + File Path for better Traceability
-folder_map = {}  # Maps file path to its folder object for later access | Instead of a tuple use of a dictionary => more logicall
+folder_map = {}  # Maps file path to its folder object for later access | Instead of a Tuple use of a dictionary => more logicall, easy to extend
                  # single dictionary that contains entries for all files from all folders
 print("=" * 80)
 print("COLLECTING FILES FROM {} FOLDER(S)".format(len(FOLDER_IDS)))
@@ -75,10 +75,10 @@ if len(all_paths) == 0:
     exit(0)
 
 # Initialize datasets
-output_data = dataiku.Dataset("MLF_Chunks")                 # Text Chunks Storage
-log_data = dataiku.Dataset("Global_Supply_Planning_Log")    # Meta Data Deticated Folder
+output_data = dataiku.Dataset("MLF_Chunks")                 # Text Chunks Folder
+log_data = dataiku.Dataset("Global_Supply_Planning_Log")    # Meta Data Folder
 
-# Define the schemas explicitly
+# Define the schemas explicitly    => Schemas are necessary since function submit rows
 output_schema = [
     {"name": "Dir_Name", "type": "string"},
     {"name": "File_Name", "type": "string"}, 
@@ -100,7 +100,7 @@ log_schema = [                                        # Metadata fields explicit
     {"name": "error", "type": "string"}
 ]
 
-# Clear datasets and set schemas   => necessary for later usage
+# Clear datasets and set schemas   => necessary for later usage opens the schema, ready to recieve rows
 output_data.write_schema(output_schema, drop_and_create=True)
 log_data.write_schema(log_schema, drop_and_create=True)
 
@@ -123,8 +123,9 @@ def clean_filename_unicode_safe(filename):
     # Remove multiple consecutive underscores
     cleaned = re.sub(r'_+', '_', cleaned)
     return cleaned
+    
 ## Main Function ##
-def process_file(path):     # responsible for extraction 
+def process_file(path):    
     """Process a single file and immediately write results"""
     global price_total, processed_count
     
@@ -177,7 +178,7 @@ def process_file(path):     # responsible for extraction
     local_path = os.path.join(folder_pref, "{}_{}".format(short_thread_id, clean_basename))
     
     pdf_path = None
-    chunks_result = [output_row]
+    chunks_result = [output_row]   # collects all chunks from each File and collect is as rows
     price_result = 0
     
     try:
@@ -235,7 +236,7 @@ def process_file(path):     # responsible for extraction
             )
             duration = round(time() - start_time)
             
-            chunks_result = chunks   # Retrun from extract_image_pdf_3 function             
+            chunks_result = chunks   # Retrun from extract_image_pdf_3 function    # pre-defined folder       
             price_result = price     # Retrun from extract_image_pdf_3 function  
             
             print("Extracted {} chunks from {} ({} tokens, ${:.2f})".format(
@@ -279,8 +280,8 @@ def process_file(path):     # responsible for extraction
     
     # Write results immediately using the writer (thread-safe)
     with write_lock:
-        # Write each chunk individually using write_row_dict
-        for chunk in chunks_result:
+        # Write chunks using write_row_dict
+        for chunk in chunks_result:   # submit rows from chunk_result dataset
             output_writer.write_row_dict(chunk)
         
         # Write log entry
