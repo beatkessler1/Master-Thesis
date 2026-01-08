@@ -304,9 +304,9 @@ print("STARTING PROCESSING OF {} FILES FROM {} FOLDER(S)".format(total_files, le
 print("=" * 80 + "\n")
 
 try:
-    with ThreadPoolExecutor(max_workers=5) as executor:
+    with ThreadPoolExecutor(max_workers=5) as executor:     
         # Submit all tasks
-        future_to_path = {executor.submit(process_file, path): path for path in all_paths}
+        future_to_path = {executor.submit(process_file, path): path for path in all_paths}  # same function done with 5 executors
         
         # Process results as they complete
         for future in as_completed(future_to_path):
@@ -316,7 +316,7 @@ try:
             except Exception as e:
                 print("Critical error processing {}: {}".format(path, e))
                 # Still log the error
-                with write_lock:
+                with write_lock:                # isolating logging to make sure rest still works
                     error_log = {
                         'directory': os.path.dirname(path),
                         'file_name': os.path.basename(path),
