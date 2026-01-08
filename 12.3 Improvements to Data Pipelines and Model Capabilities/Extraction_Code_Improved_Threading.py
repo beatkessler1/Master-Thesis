@@ -261,19 +261,19 @@ print("Starting processing of {} files".format(total_files))
 # Threading Approach
 
 try:
-    with ThreadPoolExecutor(max_workers=8) as executor:
+    with ThreadPoolExecutor(max_workers=8) as executos: # Creates 8 Threads   Executors = max_workers
         # Submit all tasks
-        future_to_path = {executor.submit(process_file, path): path for path in all_paths}
-        
-        # Process results as they complete
-        for future in as_completed(future_to_path):
-            path = future_to_path[future]
+        future_to_path = {executor.submit(process_file, path): path for path in all_paths} # submit and start tasks in parallel
+                                                                                           # process_file () => pre-function
+        # This parts writ error messages                                                   # path => all_paths = folder.list_paths_in_partition() 
+        for future in as_completed(future_to_path):                                        # returns future
+            path = future_to_path[future]  # check which finished task it belongs
             try:
                 future.result()
-            except Exception as e:
+            except Exception as e:          # catches unexpected errors
                 print("Critical error processing {}: {}".format(path, e))
                 # Still log the error
-                with write_lock:
+                with write_lock:            # ensure that multiple threads do not write dataset simultaneously
                     error_log = {
                         'directory': os.path.dirname(path),
                         'file_name': os.path.basename(path),
@@ -281,7 +281,7 @@ try:
                         'token_count': '', 'extract_duration': '', 'price_total': '',
                         'error': 'Critical failure: {}'.format(str(e))
                     }
-                    log_writer.write_row_dict(error_log)
+                    log_writer.write_row_dict(error_log)  writes error code
 
 finally:
     # Close the writers
