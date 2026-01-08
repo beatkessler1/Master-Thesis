@@ -595,7 +595,7 @@ def extract_image_pdf_gemini(file_path, dirname, basename, gemini_config, model_
             
             # Calculate price
             price_total += (ppmt[0] * tokens_prompt + ppmt[1] * tokens_complet) / 1000000
-
+            # ppmt = price per milion token,  ppmt(0) = Input Token, ppmt(1) = Output Token
             chunks.append({
                 'Dir_Name': dirname,
                 'File_Name': basename,
