@@ -166,4 +166,4 @@ for path in all_paths:
 
 # Write recipe outputs
 output_df = pd.concat([output_df, pd.DataFrame(output_list)], ignore_index=True)
-output_data.write_with_schema(output_df)  # writting chunks at the end, risk of running out of memory
+output_data.write_with_schema(output_df)  # writting chunks after all_paths, risk of running out of memory
