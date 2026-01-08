@@ -41,27 +41,27 @@ Folder_1 = "Ms4f1qz8"
 Folder_2 = "v1nFJ0sh"
 Folder_3 = ""  
 
-# Automatically collect non-empty folder IDs
+# Automatically collect non-empty folder IDs  Collect IDs get rid of white space
 FOLDER_IDS = [f for f in [Folder_1, Folder_2, Folder_3, Folder_4, Folder_5] if f.strip()]
 
 
 # Collect all file paths from all folders
-all_paths = []
-folder_map = {}  # Maps file path to its folder object for later access
+all_paths = []    # Folder Context + File Path for better Traceability
+folder_map = {}  # Maps file path to its folder object for later access | Instead of a tuple use of a dictionary more logic 
 
 print("=" * 80)
 print("COLLECTING FILES FROM {} FOLDER(S)".format(len(FOLDER_IDS)))
 print("=" * 80)
 
-for folder_id in FOLDER_IDS:
+for folder_id in FOLDER_IDS:   # First Folder Level, iterates over Folders
     try:
-        folder = dataiku.Folder(folder_id)
+        folder = dataiku.Folder(folder_id)   # Access Folders
         paths = folder.list_paths_in_partition()
         
         # Store folder reference for each path
-        for path in paths:
-            folder_map[path] = folder
-            all_paths.append(path)
+        for path in paths:                           # Seccond File Level, iterates over Files
+            folder_map[path] = folder  # for local processing
+            all_paths.append(path)     # for better traceability
         
         print("Folder '{}': {} files found".format(folder_id, len(paths)))
     except Exception as e:
@@ -76,8 +76,8 @@ if len(all_paths) == 0:
     exit(0)
 
 # Initialize datasets
-output_data = dataiku.Dataset("MLF_Chunks")
-log_data = dataiku.Dataset("Global_Supply_Planning_Log")
+output_data = dataiku.Dataset("MLF_Chunks")                 # Text Chunks Storage
+log_data = dataiku.Dataset("Global_Supply_Planning_Log")    # Meta Data Deticated Folder
 
 # Define the schemas explicitly
 output_schema = [
@@ -89,15 +89,15 @@ output_schema = [
     {"name": "Token_Count", "type": "int"}
 ]
 
-log_schema = [
-    {"name": "directory", "type": "string"},
+log_schema = [                                        # Metadata fields explicitly defined
+    {"name": "directory", "type": "string"},          # ensures automatic, consistent logging
     {"name": "file_name", "type": "string"},
     {"name": "file_size", "type": "string"},
     {"name": "memory_total", "type": "string"},
-    {"name": "page_count", "type": "string"},
+    {"name": "page_count", "type": "string"},         # Page Count
     {"name": "token_count", "type": "string"},
-    {"name": "extract_duration", "type": "string"},
-    {"name": "price_total", "type": "string"},
+    {"name": "extract_duration", "type": "string"},   # Extraction Time
+    {"name": "price_total", "type": "string"},        # Processing Cost
     {"name": "error", "type": "string"}
 ]
 
@@ -242,7 +242,7 @@ def process_file(path):
             print("Extracted {} chunks from {} ({} tokens, ${:.2f})".format(
                 len(chunks), basename, tokens, price))
             
-            # Update log row with success info
+            # Update log row with info from extract_image_pdf_3 code snippet
             log_row.update({
                 'page_count': str(pages),
                 'token_count': str(tokens),
