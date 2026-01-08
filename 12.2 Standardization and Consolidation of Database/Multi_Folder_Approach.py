@@ -123,7 +123,7 @@ def clean_filename_unicode_safe(filename):
     # Remove multiple consecutive underscores
     cleaned = re.sub(r'_+', '_', cleaned)
     return cleaned
-## Main Code ##
+## Main Function ##
 def process_file(path):     # responsible for extraction 
     """Process a single file and immediately write results"""
     global price_total, processed_count
