@@ -124,7 +124,7 @@ def clean_filename_unicode_safe(filename):
     cleaned = re.sub(r'_+', '_', cleaned)
     return cleaned
 
-def process_file(path):
+def process_file(path):     # responsible for extraction 
     """Process a single file and immediately write results"""
     global price_total, processed_count
     
@@ -227,7 +227,7 @@ def process_file(path):
                 output_writer.write_row_dict(output_row)
             return
         
-        # Extract content
+        # Extract content !!
         try:
             start_time = time()
             chunks, pages, tokens, price = extract_image_pdf_3(
