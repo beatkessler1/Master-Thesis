@@ -40,25 +40,25 @@ Folder_1 = "Ms4f1qz8"
 Folder_2 = "v1nFJ0sh"
 Folder_3 = ""  
 
-# Automatically collect non-empty folder IDs  Collect IDs get rid of white space
+# Automatically collect non-empty folder IDs => Collect IDs get rid of white space
 FOLDER_IDS = [f for f in [Folder_1, Folder_2, Folder_3, Folder_4, Folder_5] if f.strip()]
 
 
 # Collect all file paths from all folders
-all_paths = []    # Folder Context + File Path for better Traceability
-folder_map = {}  # Maps file path to its folder object for later access | Instead of a tuple use of a dictionary more logic 
-
+all_paths = []   # Folder Context + File Path for better Traceability
+folder_map = {}  # Maps file path to its folder object for later access | Instead of a tuple use of a dictionary => more logicall
+                 # single dictionary that contains entries for all files from all folders
 print("=" * 80)
 print("COLLECTING FILES FROM {} FOLDER(S)".format(len(FOLDER_IDS)))
 print("=" * 80)
 
-for folder_id in FOLDER_IDS:   # First Folder Level, iterates over Folders
+for folder_id in FOLDER_IDS:   # First Level, iterates over Folders
     try:
         folder = dataiku.Folder(folder_id)   # Access Folders
         paths = folder.list_paths_in_partition()
         
         # Store folder reference for each path
-        for path in paths:                           # Seccond File Level, iterates over Files
+        for path in paths:                           # Seccond Level, iterates over Files
             folder_map[path] = folder  # for local processing
             all_paths.append(path)     # for better traceability
         
@@ -129,7 +129,7 @@ def process_file(path):     # responsible for extraction
     global price_total, processed_count
     
     # Get the correct folder object for this path
-    folder = folder_map.get(path)
+    folder = folder_map.get(path)   # connection to MF Approach, path = key value
     if folder is None:
         print("ERROR: No folder mapping found for path: {}".format(path))
         return
