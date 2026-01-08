@@ -284,8 +284,8 @@ def process_file(path):     # responsible for extraction
             output_writer.write_row_dict(chunk)
         
         # Write log entry
-        log_writer.write_row_dict(log_row)
-    
+        log_writer.write_row_dict(log_row)       # output_data.write_with_schema(output_df)  
+        
     # Update global price counter (thread-safe)
     with price_lock:
         price_total += price_result
