@@ -281,7 +281,7 @@ try:
                         'token_count': '', 'extract_duration': '', 'price_total': '',
                         'error': 'Critical failure: {}'.format(str(e))
                     }
-                    log_writer.write_row_dict(error_log)  writes error code
+                    log_writer.write_row_dict(error_log)  # writes error code
 
 finally:
     # Close the writers
