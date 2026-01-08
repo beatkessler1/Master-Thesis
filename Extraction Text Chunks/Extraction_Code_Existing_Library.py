@@ -522,9 +522,7 @@ def extract_image_pdf_3(file_path, dirname, basename, openai, model_name, ppmt):
             })
             
     
-    return chunks, pages_total, tokens_total, price_total
-
-
+    return chunks, pages_total, tokens_total, price_total     # used for def process_file()
 
 def extract_image_pdf_gemini(file_path, dirname, basename, gemini_config, model_name, ppmt):
     chunks = []
