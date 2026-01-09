@@ -236,8 +236,8 @@ def process_file(path):
             )
             duration = round(time() - start_time)
             
-            chunks_result = chunks   # Retrun from extract_image_pdf_3 function    # pre-defined folder       
-            price_result = price     # Retrun from extract_image_pdf_3 function  
+            chunks_result = chunks   # Return from extract_image_pdf_3 function    # pre-defined folder       
+            price_result = price     # Return from extract_image_pdf_3 function  
             
             print("Extracted {} chunks from {} ({} tokens, ${:.2f})".format(
                 len(chunks), basename, tokens, price))
