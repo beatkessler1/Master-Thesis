@@ -1,4 +1,4 @@
-# Data Ingestion
+# Data Integration
 
 This component contains Python code used to ingest and preprocess data from multiple SharePoint sources into the Dataiku platform.
 
