@@ -6,5 +6,5 @@ Different LLMs were tested to compare their performance in extracting structured
 
 This folder includes:
 - The original document used for testing (Supply Chain Map / Supply Chain Map Decomposition)
-- LLM-generated outputs from different models
+- LLM-generated outputs from different models (LLM Extraction Output)
 - An analysis comparing the results and assessing output accuracy
