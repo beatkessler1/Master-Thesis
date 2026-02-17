@@ -1,7 +1,7 @@
 # GenAI Supply Chain Analytics and Knowledge Platform
 
 ## Project Overview
-This project demonstrates the design and implementation of an enterprise-grade GenAI platform for supply chain analytics and knowledge retrieval in the pharmaceutical industry.
+This project demonstrates the design and implementation of an enterprise-grade GenAI platform for supply chain analytics and knowledge retrieval in the life science industry.
 
 The solution combines structured SAP data with unstructured documentation using Retrieval-Augmented Generation (RAG) and Large Language Models (LLMs) to support data-driven decision-making and improve operational transparency.
 
@@ -22,7 +22,7 @@ Key capabilities include:
 - Retrieval of relevant documents using vector-based search
 - Analytics on structured SAP data
 - Automated data ingestion and preprocessing
-- LLM-based processing and summarization of supply chain documentation
+- LLM-based processing of supply chain documentation
 
 ---
 
@@ -30,26 +30,24 @@ Key capabilities include:
 
 This repository is structured into modular components reflecting the main parts of the solution:
 
-- ingestion_pipeline/  
-  Python-based data ingestion and preprocessing pipelines used to prepare structured and unstructured data.
+- Data Integration/  
+  Integration and ingestion of structured and unstructured data from multiple enterprise knowledge repositories into the analytics platform.
+  
+- Evaluation of Developed Models/  
+  Structured evaluation of developed models using quantitative and qualitative feedback from supply chain domain experts.
+  
+- Extraction Text Chunks/  
+  Document parsing and chunk extraction pipelines used to prepare textual data for embedding, retrieval, and GenAI applications.
+  
+- Image and Graphic Interpretation/  
+  Evaluation of Large Language Models (LLMs) in interpreting complex supply chain graphics and comparison of different processing approaches.
 
-- rag_pipeline/  
-  Simplified components of Retrieval-Augmented Generation workflows, including document chunking and vector retrieval logic.
+- Presentation/  
+  High-level overview of the project’s business context, strategic approach, architecture, and key results prepared for stakeholders.
 
-- sql_analytics/  
-  Example SQL queries and analytics logic used for structured SAP data analysis.
-
-- architecture/  
-  Architecture diagrams and system design documentation.
-
-- presentation/  
-  Project presentation summarizing the business problem, solution design, and results.
-
----
-
-## Architecture
-See the architecture diagrams in the `/architecture` folder for a high-level overview of the system design and data flows.
-
+- SQL Generation/  
+  Prompt-based generation of SQL queries to efficiently retrieve structured data and enable scalable analytics workflows.
+  
 ---
 
 ## Tech Stack
